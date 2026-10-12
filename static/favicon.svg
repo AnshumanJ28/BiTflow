@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#ff3366" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#090e14" stroke="#1c2b3a" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <!-- Input leads -->
+    <line x1="8" y1="22" x2="18" y2="22" stroke="#ff3366" stroke-width="3" stroke-linecap="round"/>
+    <line x1="8" y1="42" x2="18" y2="42" stroke="#ff3366" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- NAND Gate Body (D-shape) -->
+    <path d="M 18,14 L 28,14 C 38,14 42,22 42,32 C 42,42 38,50 28,50 L 18,50 Z" 
+          fill="#2b0d15" stroke="#ff3366" stroke-width="3" stroke-linejoin="round"/>
+    
+    <!-- Negation Bubble -->
+    <circle cx="46" cy="32" r="3.5" fill="#090e14" stroke="#ff3366" stroke-width="2.5"/>
+    
+    <!-- Output lead -->
+    <line x1="49.5" y1="32" x2="56" y2="32" stroke="#ff3366" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -47,3 +47,10 @@ A pre-built sample circuit is included in the repository:
 ## Author
 
 **Anshuman Joshi** ([@AnshumanJ28](https://github.com/AnshumanJ28))
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
