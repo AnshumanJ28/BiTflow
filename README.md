@@ -6,7 +6,7 @@
 
 > An interactive, real-time digital logic gate simulator and visualizer with high-speed signal evaluation and truth table analysis.
 
-**Live Demo:** [https://bitflow.onrender.com](https://bitflow.onrender.com)
+**Live Demo:** [https://bitflow-nwr8.onrender.com](https://bitflow-nwr8.onrender.com/)
 
 ---
 
