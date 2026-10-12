@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BiTflow - Logic Gate Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toolbar">
+    <div class="brand">BiT<span>flow</span></div>
+
+    <div class="group">
+      <div class="custom-dropdown" id="dropdown-presets">
+        <button type="button" class="dropdown-toggle" id="dropdown-presets-btn" aria-haspopup="true" aria-expanded="false" title="Load a preset circuit">
+          <span>Presets</span>
+          <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="dropdown-menu" id="dropdown-presets-menu" hidden>
+          <div class="dropdown-title">Preset Circuits</div>
+          <button type="button" class="dropdown-option" data-preset="Half Adder">
+            <span class="preset-title">Half Adder</span>
+            <span class="preset-tag">2 In, 2 Out</span>
+          </button>
+          <button type="button" class="dropdown-option" data-preset="Full Adder">
+            <span class="preset-title">Full Adder</span>
+            <span class="preset-tag">3 In, 2 Out</span>
+          </button>
+          <button type="button" class="dropdown-option" data-preset="SR Latch">
+            <span class="preset-title">SR Latch</span>
+            <span class="preset-tag">Bistable Memory</span>
+          </button>
+          <button type="button" class="dropdown-option" data-preset="XOR from NANDs">
+            <span class="preset-title">XOR from NANDs</span>
+            <span class="preset-tag">Universal Logic</span>
+          </button>
+        </div>
+      </div>
+      <select id="presets" hidden aria-hidden="true">
+        <option value="">Presets</option>
+      </select>
+      <button id="btn-clear" title="Remove every component">Clear</button>
+    </div>
+
+    <div class="group">
+      <button id="btn-export" title="Download the circuit as JSON (Ctrl+S)">Export</button>
+      <button id="btn-import" title="Load a circuit from a JSON file (Ctrl+O)">Import</button>
+      <input id="file" type="file" accept="application/json,.json" hidden>
+    </div>
+
+    <div class="group right">
+      <button id="btn-fit" title="Fit the circuit in view (F)">Fit</button>
+      <button id="btn-table" class="accent" title="Compute the truth table on the server">Truth Table</button>
+      <a href="https://github.com/AnshumanJ28/BiTflow" target="_blank" rel="noopener noreferrer" class="btn-github" title="View BiTflow on GitHub" id="btn-github">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="palette">
+      <div id="palette"></div>
+      <div class="hints">
+        <h3>Controls</h3>
+        <ul>
+          <li><kbd>Drag</kbd> output pin to input pin to wire</li>
+          <li><kbd>Click</kbd> a switch to toggle it</li>
+          <li><kbd>Right-click</kbd> gate to delete</li>
+          <li><kbd>Wheel</kbd> zoom, drag canvas to pan</li>
+          <li><kbd>Del</kbd> delete selection</li>
+          <li><kbd>F</kbd> fit in view</li>
+          <li><kbd>Double-click</kbd> rename</li>
+          <li><kbd>Shift</kbd> multi-select</li>
+        </ul>
+        <div class="sidebar-github">
+          <a href="https://github.com/AnshumanJ28/BiTflow" target="_blank" rel="noopener noreferrer" class="sidebar-github-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>AnshumanJ28/BiTflow</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <section class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div id="tip" class="tip" hidden></div>
+      <div id="context-menu" class="context-menu" hidden>
+        <div class="context-menu-title" id="ctx-title">Gate</div>
+        <div class="context-menu-divider"></div>
+        <button type="button" class="context-menu-item danger" id="ctx-delete">
+          <span class="ctx-label">Delete Gate</span>
+          <kbd>Del</kbd>
+        </button>
+        <button type="button" class="context-menu-item" id="ctx-rename">
+          <span class="ctx-label">Rename...</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="status">
+    <span id="status-msg">Ready</span>
+    <div class="status-right">
+      <span id="status-info"></span>
+      <a href="https://github.com/AnshumanJ28/BiTflow" target="_blank" rel="noopener noreferrer" class="status-github-link" title="BiTflow GitHub Repository">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </footer>
+
+  <dialog id="table-dialog">
+    <div class="dialog-head">
+      <h2>Truth Table</h2>
+      <button id="table-close" class="icon" title="Close">Close</button>
+    </div>
+    <div id="table-body" class="dialog-body"></div>
+  </dialog>
+
+  <script src="engine.js"></script>
+  <script src="presets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "logic-gate-sim-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "End-to-end checks that run against a live server",
+  "scripts": {
+    "parity": "node parity.js",
+    "smoke": "node smoke.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": 1,
+      "kind": "OR",
+      "x": 160,
+      "y": 80,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 2,
+      "kind": "OR",
+      "x": 160,
+      "y": 280,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 3,
+      "kind": "AND",
+      "x": 360,
+      "y": 320,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 4,
+      "kind": "OR",
+      "x": 580,
+      "y": 80,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 5,
+      "kind": "OR",
+      "x": 580,
+      "y": 300,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 7,
+      "kind": "PROBE",
+      "x": 800,
+      "y": 320,
+      "value": false,
+      "label": "P"
+    },
+    {
+      "id": 8,
+      "kind": "INPUT_SWITCH",
+      "x": -20,
+      "y": 180,
+      "value": true,
+      "label": "A"
+    },
+    {
+      "id": 9,
+      "kind": "INPUT_SWITCH",
+      "x": -20,
+      "y": 80,
+      "value": true,
+      "label": "B"
+    },
+    {
+      "id": 11,
+      "kind": "NOR",
+      "x": 160,
+      "y": 520,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 12,
+      "kind": "NOR",
+      "x": 160,
+      "y": 740,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 13,
+      "kind": "NAND",
+      "x": 360,
+      "y": 560,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 14,
+      "kind": "NOR",
+      "x": 580,
+      "y": 520,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 15,
+      "kind": "NOR",
+      "x": 580,
+      "y": 740,
+      "value": false,
+      "label": ""
+    },
+    {
+      "id": 17,
+      "kind": "PROBE",
+      "x": 820,
+      "y": 560,
+      "value": false,
+      "label": "P2"
+    },
+    {
+      "id": 18,
+      "kind": "INPUT_SWITCH",
+      "x": -60,
+      "y": 600,
+      "value": false,
+      "label": "D"
+    },
+    {
+      "id": 20,
+      "kind": "INPUT_SWITCH",
+      "x": -60,
+      "y": 740,
+      "value": false,
+      "label": "F"
+    }
+  ],
+  "wires": [
+    {
+      "id": 9,
+      "from": 8,
+      "from_pin": 0,
+      "to": 1,
+      "to_pin": 1
+    },
+    {
+      "id": 10,
+      "from": 8,
+      "from_pin": 0,
+      "to": 2,
+      "to_pin": 0
+    },
+    {
+      "id": 11,
+      "from": 9,
+      "from_pin": 0,
+      "to": 1,
+      "to_pin": 0
+    },
+    {
+      "id": 15,
+      "from": 18,
+      "from_pin": 0,
+      "to": 11,
+      "to_pin": 1
+    },
+    {
+      "id": 16,
+      "from": 18,
+      "from_pin": 0,
+      "to": 12,
+      "to_pin": 0
+    },
+    {
+      "id": 17,
+      "from": 20,
+      "from_pin": 0,
+      "to": 12,
+      "to_pin": 1
+    },
+    {
+      "id": 26,
+      "from": 2,
+      "from_pin": 0,
+      "to": 13,
+      "to_pin": 0
+    },
+    {
+      "id": 27,
+      "from": 12,
+      "from_pin": 0,
+      "to": 13,
+      "to_pin": 1
+    },
+    {
+      "id": 28,
+      "from": 11,
+      "from_pin": 0,
+      "to": 3,
+      "to_pin": 1
+    },
+    {
+      "id": 29,
+      "from": 1,
+      "from_pin": 0,
+      "to": 3,
+      "to_pin": 0
+    },
+    {
+      "id": 30,
+      "from": 3,
+      "from_pin": 0,
+      "to": 14,
+      "to_pin": 0
+    },
+    {
+      "id": 31,
+      "from": 3,
+      "from_pin": 0,
+      "to": 4,
+      "to_pin": 0
+    },
+    {
+      "id": 32,
+      "from": 1,
+      "from_pin": 0,
+      "to": 4,
+      "to_pin": 1
+    },
+    {
+      "id": 33,
+      "from": 13,
+      "from_pin": 0,
+      "to": 5,
+      "to_pin": 1
+    },
+    {
+      "id": 34,
+      "from": 13,
+      "from_pin": 0,
+      "to": 15,
+      "to_pin": 0
+    },
+    {
+      "id": 35,
+      "from": 12,
+      "from_pin": 0,
+      "to": 15,
+      "to_pin": 1
+    },
+    {
+      "id": 36,
+      "from": 2,
+      "from_pin": 0,
+      "to": 5,
+      "to_pin": 0
+    },
+    {
+      "id": 37,
+      "from": 11,
+      "from_pin": 0,
+      "to": 14,
+      "to_pin": 1
+    },
+    {
+      "id": 38,
+      "from": 15,
+      "from_pin": 0,
+      "to": 2,
+      "to_pin": 1
+    },
+    {
+      "id": 39,
+      "from": 5,
+      "from_pin": 0,
+      "to": 11,
+      "to_pin": 0
+    },
+    {
+      "id": 40,
+      "from": 4,
+      "from_pin": 0,
+      "to": 7,
+      "to_pin": 0
+    },
+    {
+      "id": 41,
+      "from": 14,
+      "from_pin": 0,
+      "to": 17,
+      "to_pin": 0
+    }
+  ]
+}
